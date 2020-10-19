@@ -1,0 +1,103 @@
+﻿<DeploymentSnapshot xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0">
+  <Target>
+    <Database>IB160103_OLAP_Multidimensional</Database>
+    <Server>DESKTOP-0U03SDC\MSSQLSERVER_OLAP</Server>
+    <ConnectionString>Data Source=DESKTOP-0U03SDC\MSSQLSERVER_OLAP;Timeout=0</ConnectionString>
+  </Target>
+  <Options>
+    <TransactionalDeployment>false</TransactionalDeployment>
+    <PartitionDeployment>DeployPartitions</PartitionDeployment>
+    <RoleDeployment>DeployRolesRetainMembers</RoleDeployment>
+    <ProcessingOption>DoNotProcess</ProcessingOption>
+    <OutputScript></OutputScript>
+    <ImpactAnalysisFile></ImpactAnalysisFile>
+    <ConfigurationSettingsDeployment>Deploy</ConfigurationSettingsDeployment>
+    <OptimizationSettingsDeployment>Deploy</OptimizationSettingsDeployment>
+    <WriteBackTableCreation>UseExisting</WriteBackTableCreation>
+  </Options>
+  <Snapshot>
+    <ObjectSnapshots>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.RelationalDataSource</Type>
+        <TimeStamp>x8wsvagSOBPiNCKolFeh7DJ3ITM=1/18/2020 11:25:36 AM1/18/2020 11:25:36 AM</TimeStamp>
+        <ID>
+          <String>IB160103 BI DW</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.DataSourceView</Type>
+        <TimeStamp>iqQSDBCzjwr7zrrCC9LoKNszrO0=1/18/2020 11:31:57 AM1/18/2020 11:31:55 AM</TimeStamp>
+        <ID>
+          <String>IB160103 BI DW</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>K3OYZDozrckq8SLgKmMkVVWSia8=1/18/2020 12:22:16 PM1/18/2020 11:57:03 AM</TimeStamp>
+        <ID>
+          <String>Dim Products</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>wyseY+tbajDCTPtcU4PSyOUApcc=1/18/2020 12:27:55 PM1/18/2020 11:57:03 AM</TimeStamp>
+        <ID>
+          <String>Dim Date Time</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>HfFPB3vjlwNMEyxS1C2gJt8Scmc=1/18/2020 11:57:03 AM1/18/2020 11:57:03 AM</TimeStamp>
+        <ID>
+          <String>Dim Client Satisfaction</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>Uherad2SxZfCYOQ3GGBnx8MBBrU=1/18/2020 12:56:25 PM1/18/2020 11:57:03 AM</TimeStamp>
+        <ID>
+          <String>Dim Locations</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>d3PybxR7kRES3in8NvK6/kgGIag=1/18/2020 12:28:59 PM1/18/2020 11:57:03 AM</TimeStamp>
+        <ID>
+          <String>Dim Clients</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>KS2BYq2m6n528vB52uL8aUVt6b8=1/18/2020 11:57:03 AM1/18/2020 11:57:03 AM</TimeStamp>
+        <ID>
+          <String>Dim Age</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>Jy540D3LSoZb3JpYpPtK7l/pOpA=1/18/2020 11:57:03 AM1/18/2020 11:57:03 AM</TimeStamp>
+        <ID>
+          <String>Dim Delivery Time Percentage</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Cube</Type>
+        <TimeStamp>PeyQEOZ1ZAprySClKP6njzWXV6I=1/18/2020 12:34:19 PM1/18/2020 11:57:02 AM5z9rni1OTErpMmba4Q+zv33eGcE=1/18/2020 11:57:03 AM1/18/2020 11:57:03 AM</TimeStamp>
+        <ID>
+          <String>IB160103 BI DW Cube</String>
+        </ID>
+      </ObjectSnapshot>
+    </ObjectSnapshots>
+    <DatabaseSnapshot>
+      <Type>Microsoft.AnalysisServices.Database</Type>
+      <TimeStamp>IrpwCJQ3/waacRnexJxqApKGhaI=1/17/2020 9:04:30 PM1/17/2020 9:04:29 PM</TimeStamp>
+      <ID>
+        <String>IB160103_OLAP_Multidimensional</String>
+      </ID>
+    </DatabaseSnapshot>
+    <Granularity>Coarse</Granularity>
+  </Snapshot>
+  <AssemblyLocations />
+  <ProcessingComplete>true</ProcessingComplete>
+  <LastDeployed>2020-01-18T12:04:25.7Z</LastDeployed>
+</DeploymentSnapshot>

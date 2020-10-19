@@ -1,0 +1,1735 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="1/16/2020 9:50:55 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-0U03SDC"
+  DTS:CreatorName="DESKTOP-0U03SDC\WhoAm1"
+  DTS:DTSID="{E7AB4282-433E-4E00-A7C7-7BCF0E45777E}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.0900.30"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="3"
+  DTS:VersionGUID="{3AB25692-CDFE-460C-BBFD-170F55171FFF}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Sequence Container"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{9BEA0803-9794-458F-9071-7D4E70A73748}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Sequence Container">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\DimClients Load"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{4AFC74D3-C165-41EF-87DE-6E8B7845D61D}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="DimClients Load"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Sequence Container\DimClients Load\Conditional Split"
+                  componentClassID="Microsoft.ConditionalSplit"
+                  contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+                  name="Conditional Split"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\DimClients Load\Conditional Split.Inputs[Conditional Split Input]"
+                      description="Input to the Conditional Split Transformation"
+                      name="Conditional Split Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\DimClients Load\Conditional Split.Inputs[Conditional Split Input].Columns[Name]"
+                          cachedDataType="wstr"
+                          cachedLength="21"
+                          cachedName="Name"
+                          lineageId="Package\Sequence Container\DimClients Load\Merge Join.Outputs[Merge Join Output].Columns[Name]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\DimClients Load\Conditional Split.Inputs[Conditional Split Input].Columns[ClientAltKey (1)]"
+                          cachedDataType="i4"
+                          cachedName="ClientAltKey (1)"
+                          lineageId="Package\Sequence Container\DimClients Load\Merge Join.Outputs[Merge Join Output].Columns[ClientAltKey (1)]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\DimClients Load\Conditional Split.Inputs[Conditional Split Input].Columns[Name (1)]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="Name (1)"
+                          lineageId="Package\Sequence Container\DimClients Load\Merge Join.Outputs[Merge Join Output].Columns[Name (1)]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\DimClients Load\Conditional Split.Outputs[New record]"
+                      description="Output 1 of the Conditional Split Transformation"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      exclusionGroup="1"
+                      name="New record"
+                      synchronousInputId="Package\Sequence Container\DimClients Load\Conditional Split.Inputs[Conditional Split Input]"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                          name="Expression">[ISNULL](#{Package\Sequence Container\DimClients Load\Merge Join.Outputs[Merge Join Output].Columns[ClientAltKey (1)]})</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Specifies the friendly version of the expression. This expression version uses column names."
+                          expressionType="Notify"
+                          name="FriendlyExpression">ISNULL([ClientAltKey (1)])</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                          name="EvaluationOrder">0</property>
+                      </properties>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\DimClients Load\Conditional Split.Outputs[update]"
+                      description="Output 2 of the Conditional Split Transformation"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      exclusionGroup="1"
+                      name="update"
+                      synchronousInputId="Package\Sequence Container\DimClients Load\Conditional Split.Inputs[Conditional Split Input]"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                          name="Expression">#{Package\Sequence Container\DimClients Load\Merge Join.Outputs[Merge Join Output].Columns[Name]} != #{Package\Sequence Container\DimClients Load\Merge Join.Outputs[Merge Join Output].Columns[Name (1)]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Specifies the friendly version of the expression. This expression version uses column names."
+                          expressionType="Notify"
+                          name="FriendlyExpression">Name != [Name (1)]</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                          name="EvaluationOrder">1</property>
+                      </properties>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\DimClients Load\Conditional Split.Outputs[Conditional Split Default Output]"
+                      description="Default Output of the Conditional Split Transformation"
+                      exclusionGroup="1"
+                      name="Conditional Split Default Output"
+                      synchronousInputId="Package\Sequence Container\DimClients Load\Conditional Split.Inputs[Conditional Split Input]">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          name="IsDefaultOut">true</property>
+                      </properties>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\DimClients Load\Conditional Split.Outputs[Conditional Split Error Output]"
+                      description="Error Output of the Conditional Split Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Conditional Split Error Output"
+                      synchronousInputId="Package\Sequence Container\DimClients Load\Conditional Split.Inputs[Conditional Split Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\DimClients Load\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\DimClients Load\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\DimClients Load\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\DimClients Load\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\DimClients Load\Merge Join"
+                  componentClassID="Microsoft.MergeJoin"
+                  contactInfo="Merge Join;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Combine two sorted data flows into one using the FULL, LEFT, or INNER join. We recommend this transformation when data flows can be sorted at their sources."
+                  name="Merge Join"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the type of join to perform."
+                      name="JoinType"
+                      typeConverter="JoinType">1</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the number of columns in the ordering key."
+                      name="NumKeyColumns">1</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the null values are treated as equal values."
+                      name="TreatNullsAsEqual">true</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Indicates the requested maximum buffers per input before blocking."
+                      name="MaxBuffersPerInput">5</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\DimClients Load\Merge Join.Inputs[Merge Join Left Input]"
+                      hasSideEffects="true"
+                      name="Merge Join Left Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\DimClients Load\Merge Join.Inputs[Merge Join Left Input].Columns[ClientAltKey]"
+                          cachedDataType="i4"
+                          cachedName="ClientAltKey"
+                          cachedSortKeyPosition="1"
+                          lineageId="Package\Sequence Container\DimClients Load\Sort.Outputs[Sort Output].Columns[ClientAltKey]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\DimClients Load\Merge Join.Inputs[Merge Join Left Input].Columns[Name]"
+                          cachedDataType="wstr"
+                          cachedLength="21"
+                          cachedName="Name"
+                          lineageId="Package\Sequence Container\DimClients Load\Sort.Outputs[Sort Output].Columns[Name]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\DimClients Load\Merge Join.Inputs[Merge Join Left Input].Columns[PhoneNumber]"
+                          cachedDataType="wstr"
+                          cachedLength="15"
+                          cachedName="PhoneNumber"
+                          lineageId="Package\Sequence Container\DimClients Load\Sort.Outputs[Sort Output].Columns[PhoneNumber]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\DimClients Load\Merge Join.Inputs[Merge Join Left Input].Columns[Email]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="Email"
+                          lineageId="Package\Sequence Container\DimClients Load\Sort.Outputs[Sort Output].Columns[Email]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                    <input
+                      refId="Package\Sequence Container\DimClients Load\Merge Join.Inputs[Merge Join Right Input]"
+                      hasSideEffects="true"
+                      name="Merge Join Right Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\DimClients Load\Merge Join.Inputs[Merge Join Right Input].Columns[ClientAltKey]"
+                          cachedDataType="i4"
+                          cachedName="ClientAltKey"
+                          cachedSortKeyPosition="1"
+                          lineageId="Package\Sequence Container\DimClients Load\Sort 1.Outputs[Sort Output].Columns[ClientAltKey]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\DimClients Load\Merge Join.Inputs[Merge Join Right Input].Columns[Name]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="Name"
+                          lineageId="Package\Sequence Container\DimClients Load\Sort 1.Outputs[Sort Output].Columns[Name]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\DimClients Load\Merge Join.Inputs[Merge Join Right Input].Columns[PhoneNumber]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="PhoneNumber"
+                          lineageId="Package\Sequence Container\DimClients Load\Sort 1.Outputs[Sort Output].Columns[PhoneNumber]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\DimClients Load\Merge Join.Inputs[Merge Join Right Input].Columns[Email]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="Email"
+                          lineageId="Package\Sequence Container\DimClients Load\Sort 1.Outputs[Sort Output].Columns[Email]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\DimClients Load\Merge Join.Outputs[Merge Join Output]"
+                      isSorted="true"
+                      name="Merge Join Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\DimClients Load\Merge Join.Outputs[Merge Join Output].Columns[ClientAltKey]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\DimClients Load\Merge Join.Outputs[Merge Join Output].Columns[ClientAltKey]"
+                          name="ClientAltKey"
+                          sortKeyPosition="1">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\DimClients Load\Merge Join.Inputs[Merge Join Left Input].Columns[ClientAltKey]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\DimClients Load\Merge Join.Outputs[Merge Join Output].Columns[Name]"
+                          dataType="wstr"
+                          length="21"
+                          lineageId="Package\Sequence Container\DimClients Load\Merge Join.Outputs[Merge Join Output].Columns[Name]"
+                          name="Name">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\DimClients Load\Merge Join.Inputs[Merge Join Left Input].Columns[Name]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\DimClients Load\Merge Join.Outputs[Merge Join Output].Columns[PhoneNumber]"
+                          dataType="wstr"
+                          length="15"
+                          lineageId="Package\Sequence Container\DimClients Load\Merge Join.Outputs[Merge Join Output].Columns[PhoneNumber]"
+                          name="PhoneNumber">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\DimClients Load\Merge Join.Inputs[Merge Join Left Input].Columns[PhoneNumber]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\DimClients Load\Merge Join.Outputs[Merge Join Output].Columns[Email]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Sequence Container\DimClients Load\Merge Join.Outputs[Merge Join Output].Columns[Email]"
+                          name="Email">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\DimClients Load\Merge Join.Inputs[Merge Join Left Input].Columns[Email]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\DimClients Load\Merge Join.Outputs[Merge Join Output].Columns[ClientAltKey (1)]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\DimClients Load\Merge Join.Outputs[Merge Join Output].Columns[ClientAltKey (1)]"
+                          name="ClientAltKey (1)">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\DimClients Load\Merge Join.Inputs[Merge Join Right Input].Columns[ClientAltKey]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\DimClients Load\Merge Join.Outputs[Merge Join Output].Columns[Name (1)]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Sequence Container\DimClients Load\Merge Join.Outputs[Merge Join Output].Columns[Name (1)]"
+                          name="Name (1)">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\DimClients Load\Merge Join.Inputs[Merge Join Right Input].Columns[Name]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\DimClients Load\Merge Join.Outputs[Merge Join Output].Columns[PhoneNumber (1)]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Sequence Container\DimClients Load\Merge Join.Outputs[Merge Join Output].Columns[PhoneNumber (1)]"
+                          name="PhoneNumber (1)">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\DimClients Load\Merge Join.Inputs[Merge Join Right Input].Columns[PhoneNumber]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\DimClients Load\Merge Join.Outputs[Merge Join Output].Columns[Email (1)]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Sequence Container\DimClients Load\Merge Join.Outputs[Merge Join Output].Columns[Email (1)]"
+                          name="Email (1)">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\DimClients Load\Merge Join.Inputs[Merge Join Right Input].Columns[Email]}</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\DimClients Load\OLE DB Command"
+                  componentClassID="Microsoft.OLEDBCommand"
+                  contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+                  description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+                  name="OLE DB Command"
+                  usesDispositions="true"
+                  version="2">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      expressionType="Notify"
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">UPDATE DimClients
+SET Name = ?
+WHERE ClientAltKey = ?</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\DimClients Load\OLE DB Command.Connections[OleDbConnection]"
+                      connectionManagerID="{4539CB9A-D298-4950-AB7F-20A6A0D05623}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[DESKTOP-0U03SDC_MSSQLSERVER_OLAP.IB160103_BI_DW]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\DimClients Load\OLE DB Command.Inputs[OLE DB Command Input]"
+                      errorOrTruncationOperation="Command Execution"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Command Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Command.Inputs[OLE DB Command Input].Columns[ClientAltKey]"
+                          cachedDataType="i4"
+                          cachedName="ClientAltKey"
+                          cachedSortKeyPosition="1"
+                          externalMetadataColumnId="Package\Sequence Container\DimClients Load\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                          lineageId="Package\Sequence Container\DimClients Load\Merge Join.Outputs[Merge Join Output].Columns[ClientAltKey]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Command.Inputs[OLE DB Command Input].Columns[Name]"
+                          cachedDataType="wstr"
+                          cachedLength="21"
+                          cachedName="Name"
+                          externalMetadataColumnId="Package\Sequence Container\DimClients Load\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                          lineageId="Package\Sequence Container\DimClients Load\Merge Join.Outputs[Merge Join Output].Columns[Name]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                          dataType="wstr"
+                          length="50"
+                          name="Param_0">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">65</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                          dataType="i4"
+                          name="Param_1">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">81</property>
+                          </properties>
+                        </externalMetadataColumn>
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\DimClients Load\OLE DB Command.Outputs[OLE DB Command Output]"
+                      exclusionGroup="1"
+                      name="OLE DB Command Output"
+                      synchronousInputId="Package\Sequence Container\DimClients Load\OLE DB Command.Inputs[OLE DB Command Input]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\DimClients Load\OLE DB Command.Outputs[OLE DB Command Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Command Error Output"
+                      synchronousInputId="Package\Sequence Container\DimClients Load\OLE DB Command.Inputs[OLE DB Command Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\DimClients Load\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\DimClients Load\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\DimClients Load\OLE DB Destination"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="OLE DB Destination"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[DimClients]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\DimClients Load\OLE DB Destination.Connections[OleDbConnection]"
+                      connectionManagerID="{4539CB9A-D298-4950-AB7F-20A6A0D05623}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[DESKTOP-0U03SDC_MSSQLSERVER_OLAP.IB160103_BI_DW]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\DimClients Load\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ClientAltKey]"
+                          cachedDataType="i4"
+                          cachedName="ClientAltKey"
+                          cachedSortKeyPosition="1"
+                          externalMetadataColumnId="Package\Sequence Container\DimClients Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ClientAltKey]"
+                          lineageId="Package\Sequence Container\DimClients Load\Merge Join.Outputs[Merge Join Output].Columns[ClientAltKey]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Name]"
+                          cachedDataType="wstr"
+                          cachedLength="21"
+                          cachedName="Name"
+                          externalMetadataColumnId="Package\Sequence Container\DimClients Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Name]"
+                          lineageId="Package\Sequence Container\DimClients Load\Merge Join.Outputs[Merge Join Output].Columns[Name]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PhoneNumber]"
+                          cachedDataType="wstr"
+                          cachedLength="15"
+                          cachedName="PhoneNumber"
+                          externalMetadataColumnId="Package\Sequence Container\DimClients Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PhoneNumber]"
+                          lineageId="Package\Sequence Container\DimClients Load\Merge Join.Outputs[Merge Join Output].Columns[PhoneNumber]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Email]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="Email"
+                          externalMetadataColumnId="Package\Sequence Container\DimClients Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Email]"
+                          lineageId="Package\Sequence Container\DimClients Load\Merge Join.Outputs[Merge Join Output].Columns[Email]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ClientKey]"
+                          dataType="i4"
+                          name="ClientKey" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ClientAltKey]"
+                          dataType="i4"
+                          name="ClientAltKey" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Name]"
+                          dataType="wstr"
+                          length="50"
+                          name="Name" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PhoneNumber]"
+                          dataType="wstr"
+                          length="50"
+                          name="PhoneNumber" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Email]"
+                          dataType="wstr"
+                          length="50"
+                          name="Email" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\DimClients Load\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Sequence Container\DimClients Load\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\DimClients Load\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\DimClients Load\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\DimClients Load\OLE DB Source"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="OLE DB Source"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT 
+	T1.Id AS [ClientAltKey],
+	T1.FirstName + ' ' + T1.LastName	AS [Name],
+	ISNULL(T1.PhoneNumber, 'N/A')		AS [PhoneNumber],
+	ISNULL(T1.Email, 'N/A')				AS [Email]
+FROM
+		Users.Persons		T1
+	JOIN	Users.Clients	T2 ON T1.Id = T2.Id</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\DimClients Load\OLE DB Source.Connections[OleDbConnection]"
+                      connectionManagerID="{6A1ABA38-8326-42EA-8B95-0257D9F77CE2}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[DESKTOP-0U03SDC_MSSQLSERVER_OLAP.IB160103_BI]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\DimClients Load\OLE DB Source.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[ClientAltKey]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\DimClients Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ClientAltKey]"
+                          lineageId="Package\Sequence Container\DimClients Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[ClientAltKey]"
+                          name="ClientAltKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[Name]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\DimClients Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Name]"
+                          length="21"
+                          lineageId="Package\Sequence Container\DimClients Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[Name]"
+                          name="Name"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[PhoneNumber]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\DimClients Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PhoneNumber]"
+                          length="15"
+                          lineageId="Package\Sequence Container\DimClients Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[PhoneNumber]"
+                          name="PhoneNumber"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[Email]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\DimClients Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Email]"
+                          length="50"
+                          lineageId="Package\Sequence Container\DimClients Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[Email]"
+                          name="Email"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ClientAltKey]"
+                          dataType="i4"
+                          name="ClientAltKey" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Name]"
+                          dataType="wstr"
+                          length="21"
+                          name="Name" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PhoneNumber]"
+                          dataType="wstr"
+                          length="15"
+                          name="PhoneNumber" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Email]"
+                          dataType="wstr"
+                          length="50"
+                          name="Email" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\DimClients Load\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ClientAltKey]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\DimClients Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ClientAltKey]"
+                          name="ClientAltKey" />
+                        <outputColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Name]"
+                          dataType="wstr"
+                          length="21"
+                          lineageId="Package\Sequence Container\DimClients Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Name]"
+                          name="Name" />
+                        <outputColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PhoneNumber]"
+                          dataType="wstr"
+                          length="15"
+                          lineageId="Package\Sequence Container\DimClients Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PhoneNumber]"
+                          name="PhoneNumber" />
+                        <outputColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Email]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Sequence Container\DimClients Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Email]"
+                          name="Email" />
+                        <outputColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\DimClients Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\DimClients Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\DimClients Load\OLE DB Source 1"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="OLE DB Source 1"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[DimClients]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\DimClients Load\OLE DB Source 1.Connections[OleDbConnection]"
+                      connectionManagerID="{4539CB9A-D298-4950-AB7F-20A6A0D05623}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[DESKTOP-0U03SDC_MSSQLSERVER_OLAP.IB160103_BI_DW]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[ClientKey]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[ClientKey]"
+                          lineageId="Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[ClientKey]"
+                          name="ClientKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[ClientAltKey]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[ClientAltKey]"
+                          lineageId="Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[ClientAltKey]"
+                          name="ClientAltKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[Name]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[Name]"
+                          length="50"
+                          lineageId="Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[Name]"
+                          name="Name"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[PhoneNumber]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[PhoneNumber]"
+                          length="50"
+                          lineageId="Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[PhoneNumber]"
+                          name="PhoneNumber"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[Email]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[Email]"
+                          length="50"
+                          lineageId="Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[Email]"
+                          name="Email"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[ClientKey]"
+                          dataType="i4"
+                          name="ClientKey" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[ClientAltKey]"
+                          dataType="i4"
+                          name="ClientAltKey" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[Name]"
+                          dataType="wstr"
+                          length="50"
+                          name="Name" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[PhoneNumber]"
+                          dataType="wstr"
+                          length="50"
+                          name="PhoneNumber" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[Email]"
+                          dataType="wstr"
+                          length="50"
+                          name="Email" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[ClientKey]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[ClientKey]"
+                          name="ClientKey" />
+                        <outputColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[ClientAltKey]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[ClientAltKey]"
+                          name="ClientAltKey" />
+                        <outputColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[Name]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[Name]"
+                          name="Name" />
+                        <outputColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[PhoneNumber]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[PhoneNumber]"
+                          name="PhoneNumber" />
+                        <outputColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[Email]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[Email]"
+                          name="Email" />
+                        <outputColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\DimClients Load\Sort"
+                  componentClassID="Microsoft.Sort"
+                  contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+                  name="Sort"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                      name="EliminateDuplicates">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the maximum number of threads to use for sorting."
+                      expressionType="Notify"
+                      name="MaximumThreads">-1</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\DimClients Load\Sort.Inputs[Sort Input]"
+                      name="Sort Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\DimClients Load\Sort.Inputs[Sort Input].Columns[ClientAltKey]"
+                          cachedDataType="i4"
+                          cachedName="ClientAltKey"
+                          lineageId="Package\Sequence Container\DimClients Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[ClientAltKey]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">1</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\DimClients Load\Sort.Inputs[Sort Input].Columns[Name]"
+                          cachedDataType="wstr"
+                          cachedLength="21"
+                          cachedName="Name"
+                          lineageId="Package\Sequence Container\DimClients Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[Name]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">0</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\DimClients Load\Sort.Inputs[Sort Input].Columns[PhoneNumber]"
+                          cachedDataType="wstr"
+                          cachedLength="15"
+                          cachedName="PhoneNumber"
+                          lineageId="Package\Sequence Container\DimClients Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[PhoneNumber]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">0</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\DimClients Load\Sort.Inputs[Sort Input].Columns[Email]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="Email"
+                          lineageId="Package\Sequence Container\DimClients Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[Email]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">0</property>
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\DimClients Load\Sort.Outputs[Sort Output]"
+                      isSorted="true"
+                      name="Sort Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\DimClients Load\Sort.Outputs[Sort Output].Columns[ClientAltKey]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\DimClients Load\Sort.Outputs[Sort Output].Columns[ClientAltKey]"
+                          name="ClientAltKey"
+                          sortKeyPosition="1">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Sequence Container\DimClients Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[ClientAltKey]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\DimClients Load\Sort.Outputs[Sort Output].Columns[Name]"
+                          dataType="wstr"
+                          length="21"
+                          lineageId="Package\Sequence Container\DimClients Load\Sort.Outputs[Sort Output].Columns[Name]"
+                          name="Name">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Sequence Container\DimClients Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[Name]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\DimClients Load\Sort.Outputs[Sort Output].Columns[PhoneNumber]"
+                          dataType="wstr"
+                          length="15"
+                          lineageId="Package\Sequence Container\DimClients Load\Sort.Outputs[Sort Output].Columns[PhoneNumber]"
+                          name="PhoneNumber">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Sequence Container\DimClients Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[PhoneNumber]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\DimClients Load\Sort.Outputs[Sort Output].Columns[Email]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Sequence Container\DimClients Load\Sort.Outputs[Sort Output].Columns[Email]"
+                          name="Email">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Sequence Container\DimClients Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[Email]}</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\DimClients Load\Sort 1"
+                  componentClassID="Microsoft.Sort"
+                  contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+                  name="Sort 1"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                      name="EliminateDuplicates">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the maximum number of threads to use for sorting."
+                      expressionType="Notify"
+                      name="MaximumThreads">-1</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\DimClients Load\Sort 1.Inputs[Sort Input]"
+                      name="Sort Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\DimClients Load\Sort 1.Inputs[Sort Input].Columns[ClientKey]"
+                          cachedDataType="i4"
+                          cachedName="ClientKey"
+                          lineageId="Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[ClientKey]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">0</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\DimClients Load\Sort 1.Inputs[Sort Input].Columns[ClientAltKey]"
+                          cachedDataType="i4"
+                          cachedName="ClientAltKey"
+                          lineageId="Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[ClientAltKey]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">1</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\DimClients Load\Sort 1.Inputs[Sort Input].Columns[Name]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="Name"
+                          lineageId="Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[Name]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">0</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\DimClients Load\Sort 1.Inputs[Sort Input].Columns[PhoneNumber]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="PhoneNumber"
+                          lineageId="Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[PhoneNumber]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">0</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\DimClients Load\Sort 1.Inputs[Sort Input].Columns[Email]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="Email"
+                          lineageId="Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[Email]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">0</property>
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\DimClients Load\Sort 1.Outputs[Sort Output]"
+                      isSorted="true"
+                      name="Sort Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\DimClients Load\Sort 1.Outputs[Sort Output].Columns[ClientKey]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\DimClients Load\Sort 1.Outputs[Sort Output].Columns[ClientKey]"
+                          name="ClientKey">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[ClientKey]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\DimClients Load\Sort 1.Outputs[Sort Output].Columns[ClientAltKey]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\DimClients Load\Sort 1.Outputs[Sort Output].Columns[ClientAltKey]"
+                          name="ClientAltKey"
+                          sortKeyPosition="1">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[ClientAltKey]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\DimClients Load\Sort 1.Outputs[Sort Output].Columns[Name]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Sequence Container\DimClients Load\Sort 1.Outputs[Sort Output].Columns[Name]"
+                          name="Name">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[Name]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\DimClients Load\Sort 1.Outputs[Sort Output].Columns[PhoneNumber]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Sequence Container\DimClients Load\Sort 1.Outputs[Sort Output].Columns[PhoneNumber]"
+                          name="PhoneNumber">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[PhoneNumber]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\DimClients Load\Sort 1.Outputs[Sort Output].Columns[Email]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Sequence Container\DimClients Load\Sort 1.Outputs[Sort Output].Columns[Email]"
+                          name="Email">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[Email]}</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Sequence Container\DimClients Load.Paths[Merge Join Output]"
+                  endId="Package\Sequence Container\DimClients Load\Conditional Split.Inputs[Conditional Split Input]"
+                  name="Merge Join Output"
+                  startId="Package\Sequence Container\DimClients Load\Merge Join.Outputs[Merge Join Output]" />
+                <path
+                  refId="Package\Sequence Container\DimClients Load.Paths[New record]"
+                  endId="Package\Sequence Container\DimClients Load\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  name="New record"
+                  startId="Package\Sequence Container\DimClients Load\Conditional Split.Outputs[New record]" />
+                <path
+                  refId="Package\Sequence Container\DimClients Load.Paths[OLE DB Source Output]"
+                  endId="Package\Sequence Container\DimClients Load\Sort.Inputs[Sort Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Sequence Container\DimClients Load\OLE DB Source.Outputs[OLE DB Source Output]" />
+                <path
+                  refId="Package\Sequence Container\DimClients Load.Paths[OLE DB Source Output1]"
+                  endId="Package\Sequence Container\DimClients Load\Sort 1.Inputs[Sort Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Sequence Container\DimClients Load\OLE DB Source 1.Outputs[OLE DB Source Output]" />
+                <path
+                  refId="Package\Sequence Container\DimClients Load.Paths[Sort Output]"
+                  endId="Package\Sequence Container\DimClients Load\Merge Join.Inputs[Merge Join Left Input]"
+                  name="Sort Output"
+                  startId="Package\Sequence Container\DimClients Load\Sort.Outputs[Sort Output]" />
+                <path
+                  refId="Package\Sequence Container\DimClients Load.Paths[Sort Output1]"
+                  endId="Package\Sequence Container\DimClients Load\Merge Join.Inputs[Merge Join Right Input]"
+                  name="Sort Output"
+                  startId="Package\Sequence Container\DimClients Load\Sort 1.Outputs[Sort Output]" />
+                <path
+                  refId="Package\Sequence Container\DimClients Load.Paths[update]"
+                  endId="Package\Sequence Container\DimClients Load\OLE DB Command.Inputs[OLE DB Command Input]"
+                  name="update"
+                  startId="Package\Sequence Container\DimClients Load\Conditional Split.Outputs[update]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Sequence Container 1"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{308BA872-BA7E-4A86-BCF7-74231E18A52E}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Sequence Container 1">
+      <DTS:Variables />
+      <DTS:Executables />
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Sequence Container\DimClients Load"
+          TopLeft="23,27.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="205,124"
+          Size="205,168"
+          Id="Package\Sequence Container"
+          TopLeft="190,31" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="205,55"
+          Size="205,98"
+          Id="Package\Sequence Container 1"
+          TopLeft="191,252" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Sequence Container\DimClients Load">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Sequence Container\DimClients Load\OLE DB Source"
+          TopLeft="157,46" />
+        <NodeLayout
+          Size="159,42"
+          Id="Package\Sequence Container\DimClients Load\OLE DB Source 1"
+          TopLeft="376,49" />
+        <NodeLayout
+          Size="98,42"
+          Id="Package\Sequence Container\DimClients Load\Sort"
+          TopLeft="177,125" />
+        <NodeLayout
+          Size="107,42"
+          Id="Package\Sequence Container\DimClients Load\Sort 1"
+          TopLeft="398,131" />
+        <EdgeLayout
+          Id="Package\Sequence Container\DimClients Load.Paths[OLE DB Source Output]"
+          TopLeft="229,88">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37"
+              Start="0,0"
+              End="0,29.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\DimClients Load.Paths[OLE DB Source Output1]"
+          TopLeft="453.5,91">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,40"
+              Start="0,0"
+              End="0,32.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="130,42"
+          Id="Package\Sequence Container\DimClients Load\Merge Join"
+          TopLeft="274,193" />
+        <EdgeLayout
+          Id="Package\Sequence Container\DimClients Load.Paths[Sort Output]"
+          TopLeft="226,167">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="92.6666666666667,26"
+              Start="0,0"
+              End="92.6666666666667,18.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,11.4103343465046" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,11.4103343465046"
+                    Point2="0,15.4103343465046"
+                    Point3="4,15.4103343465046" />
+                  <mssgle:LineSegment
+                    End="88.6666666666667,15.4103343465046" />
+                  <mssgle:CubicBezierSegment
+                    Point1="88.6666666666667,15.4103343465046"
+                    Point2="92.6666666666667,15.4103343465046"
+                    Point3="92.6666666666667,19.4103343465046" />
+                  <mssgle:LineSegment
+                    End="92.6666666666667,18.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\DimClients Load.Paths[Sort Output1]"
+          TopLeft="398,152">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-38.6666666666667,41"
+              Start="0,0"
+              End="-38.6666666666667,33.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-34.6666666666667,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-34.6666666666667,0"
+                    Point2="-38.6666666666667,0"
+                    Point3="-38.6666666666667,4" />
+                  <mssgle:LineSegment
+                    End="-38.6666666666667,33.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Sequence Container\DimClients Load\Conditional Split"
+          TopLeft="262,265" />
+        <EdgeLayout
+          Id="Package\Sequence Container\DimClients Load.Paths[Merge Join Output]"
+          TopLeft="339.25,235">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30"
+              Start="0,0"
+              End="0,22.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Sequence Container\DimClients Load\OLE DB Destination"
+          TopLeft="411,347" />
+        <EdgeLayout
+          Id="Package\Sequence Container\DimClients Load.Paths[New record]"
+          TopLeft="339.5,307">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="157,40"
+              Start="0,0"
+              End="157,32.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16"
+                    Point2="0,20"
+                    Point3="4,20" />
+                  <mssgle:LineSegment
+                    End="153,20" />
+                  <mssgle:CubicBezierSegment
+                    Point1="153,20"
+                    Point2="157,20"
+                    Point3="157,24" />
+                  <mssgle:LineSegment
+                    End="157,32.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="52.94701171875,25,51.1059765625,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="166,42"
+          Id="Package\Sequence Container\DimClients Load\OLE DB Command"
+          TopLeft="146,344" />
+        <EdgeLayout
+          Id="Package\Sequence Container\DimClients Load.Paths[update]"
+          TopLeft="315,307">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-86,37"
+              Start="0,0"
+              End="-86,29.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,11.0268199233716" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,11.0268199233716"
+                    Point2="0,15.0268199233716"
+                    Point3="-4,15.0268199233716" />
+                  <mssgle:LineSegment
+                    End="-82,15.0268199233716" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-82,15.0268199233716"
+                    Point2="-86,15.0268199233716"
+                    Point3="-86,19.0268199233716" />
+                  <mssgle:LineSegment
+                    End="-86,29.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-58.8025,20.0268199233716,31.605,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\DimClients Load\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\DimClients Load\OLE DB Source 1">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\DimClients Load\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

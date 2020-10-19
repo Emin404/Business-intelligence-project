@@ -1,0 +1,2447 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="1/16/2020 10:16:33 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-0U03SDC"
+  DTS:CreatorName="DESKTOP-0U03SDC\WhoAm1"
+  DTS:DTSID="{00AB9086-0620-4FD4-AA46-C2FBF6BA7D5F}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.0900.30"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="DimLocationsIncrementalLoad"
+  DTS:PackageType="5"
+  DTS:VersionBuild="17"
+  DTS:VersionGUID="{00EF143F-26CF-4A5F-A0B9-4EE3F9FB3C1A}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Sequence Container"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{B982B102-2586-42DE-81F5-39EDA5247D70}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Sequence Container">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Update and Insert data"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{4DD94B59-6226-4EC0-A82A-C64B2E436BD0}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Update and Insert data"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Sequence Container\Update and Insert data\Conditional Split"
+                  componentClassID="Microsoft.ConditionalSplit"
+                  contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+                  name="Conditional Split"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\Update and Insert data\Conditional Split.Inputs[Conditional Split Input]"
+                      description="Input to the Conditional Split Transformation"
+                      name="Conditional Split Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\Update and Insert data\Conditional Split.Inputs[Conditional Split Input].Columns[City (1)]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="City (1)"
+                          lineageId="Package\Sequence Container\Update and Insert data\Merge Join.Outputs[Merge Join Output].Columns[City (1)]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Update and Insert data\Conditional Split.Inputs[Conditional Split Input].Columns[City]"
+                          cachedDataType="wstr"
+                          cachedLength="20"
+                          cachedName="City"
+                          lineageId="Package\Sequence Container\Update and Insert data\Merge Join.Outputs[Merge Join Output].Columns[City]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Update and Insert data\Conditional Split.Inputs[Conditional Split Input].Columns[LocationAltKey (1)]"
+                          cachedDataType="i4"
+                          cachedName="LocationAltKey (1)"
+                          lineageId="Package\Sequence Container\Update and Insert data\Merge Join.Outputs[Merge Join Output].Columns[LocationAltKey (1)]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Update and Insert data\Conditional Split.Outputs[New record]"
+                      description="Output 1 of the Conditional Split Transformation"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      exclusionGroup="1"
+                      name="New record"
+                      synchronousInputId="Package\Sequence Container\Update and Insert data\Conditional Split.Inputs[Conditional Split Input]"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                          name="Expression">[ISNULL](#{Package\Sequence Container\Update and Insert data\Merge Join.Outputs[Merge Join Output].Columns[LocationAltKey (1)]})</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Specifies the friendly version of the expression. This expression version uses column names."
+                          expressionType="Notify"
+                          name="FriendlyExpression">ISNULL([LocationAltKey (1)])</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                          name="EvaluationOrder">0</property>
+                      </properties>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\Update and Insert data\Conditional Split.Outputs[Update]"
+                      description="Output 2 of the Conditional Split Transformation"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      exclusionGroup="1"
+                      name="Update"
+                      synchronousInputId="Package\Sequence Container\Update and Insert data\Conditional Split.Inputs[Conditional Split Input]"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                          name="Expression">#{Package\Sequence Container\Update and Insert data\Merge Join.Outputs[Merge Join Output].Columns[City]} != #{Package\Sequence Container\Update and Insert data\Merge Join.Outputs[Merge Join Output].Columns[City (1)]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Specifies the friendly version of the expression. This expression version uses column names."
+                          expressionType="Notify"
+                          name="FriendlyExpression">City != [City (1)]</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                          name="EvaluationOrder">1</property>
+                      </properties>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\Update and Insert data\Conditional Split.Outputs[Conditional Split Default Output]"
+                      description="Default Output of the Conditional Split Transformation"
+                      exclusionGroup="1"
+                      name="Conditional Split Default Output"
+                      synchronousInputId="Package\Sequence Container\Update and Insert data\Conditional Split.Inputs[Conditional Split Input]">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          name="IsDefaultOut">true</property>
+                      </properties>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\Update and Insert data\Conditional Split.Outputs[Conditional Split Error Output]"
+                      description="Error Output of the Conditional Split Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Conditional Split Error Output"
+                      synchronousInputId="Package\Sequence Container\Update and Insert data\Conditional Split.Inputs[Conditional Split Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Update and Insert data\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Update and Insert data\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Update and Insert data\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Update and Insert data\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\Update and Insert data\DimLocations"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="DimLocations"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[DimLocations]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\Update and Insert data\DimLocations.Connections[OleDbConnection]"
+                      connectionManagerID="{4539CB9A-D298-4950-AB7F-20A6A0D05623}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[DESKTOP-0U03SDC_MSSQLSERVER_OLAP.IB160103_BI_DW]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\Update and Insert data\DimLocations.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\Update and Insert data\DimLocations.Inputs[OLE DB Destination Input].Columns[LocationAltKey]"
+                          cachedDataType="i4"
+                          cachedName="LocationAltKey"
+                          cachedSortKeyPosition="1"
+                          externalMetadataColumnId="Package\Sequence Container\Update and Insert data\DimLocations.Inputs[OLE DB Destination Input].ExternalColumns[LocationAltKey]"
+                          lineageId="Package\Sequence Container\Update and Insert data\Merge Join.Outputs[Merge Join Output].Columns[LocationAltKey]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Update and Insert data\DimLocations.Inputs[OLE DB Destination Input].Columns[CountryCode]"
+                          cachedDataType="wstr"
+                          cachedLength="5"
+                          cachedName="CountryCode"
+                          externalMetadataColumnId="Package\Sequence Container\Update and Insert data\DimLocations.Inputs[OLE DB Destination Input].ExternalColumns[CountryCode]"
+                          lineageId="Package\Sequence Container\Update and Insert data\Merge Join.Outputs[Merge Join Output].Columns[CountryCode]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Update and Insert data\DimLocations.Inputs[OLE DB Destination Input].Columns[Region]"
+                          cachedDataType="wstr"
+                          cachedLength="20"
+                          cachedName="Region"
+                          externalMetadataColumnId="Package\Sequence Container\Update and Insert data\DimLocations.Inputs[OLE DB Destination Input].ExternalColumns[Region]"
+                          lineageId="Package\Sequence Container\Update and Insert data\Merge Join.Outputs[Merge Join Output].Columns[Region]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Update and Insert data\DimLocations.Inputs[OLE DB Destination Input].Columns[City]"
+                          cachedDataType="wstr"
+                          cachedLength="20"
+                          cachedName="City"
+                          externalMetadataColumnId="Package\Sequence Container\Update and Insert data\DimLocations.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                          lineageId="Package\Sequence Container\Update and Insert data\Merge Join.Outputs[Merge Join Output].Columns[City]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Update and Insert data\DimLocations.Inputs[OLE DB Destination Input].ExternalColumns[LocationKey]"
+                          dataType="i4"
+                          name="LocationKey" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Update and Insert data\DimLocations.Inputs[OLE DB Destination Input].ExternalColumns[LocationAltKey]"
+                          dataType="i4"
+                          name="LocationAltKey" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Update and Insert data\DimLocations.Inputs[OLE DB Destination Input].ExternalColumns[CountryCode]"
+                          dataType="wstr"
+                          length="5"
+                          name="CountryCode" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Update and Insert data\DimLocations.Inputs[OLE DB Destination Input].ExternalColumns[Region]"
+                          dataType="wstr"
+                          length="30"
+                          name="Region" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Update and Insert data\DimLocations.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                          dataType="wstr"
+                          length="30"
+                          name="City" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Update and Insert data\DimLocations.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Sequence Container\Update and Insert data\DimLocations.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Update and Insert data\DimLocations.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Update and Insert data\DimLocations.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Update and Insert data\DimLocations.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Update and Insert data\DimLocations.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\Update and Insert data\IB160103"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="IB160103"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT
+	T1.Id	  AS [LocationAltKey],
+	T1.[Name] AS [City],
+	T2.[Name] AS [Region],
+	T3.Code   AS [CountryCode]
+FROM
+		  Regional.Cities			T1
+	LEFT JOIN Regional.Regions		T2 ON T1.RegionId = T2.Id
+	LEFT JOIN Regional.Countries    T3 ON T2.CountryId = T3.Id</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\Update and Insert data\IB160103.Connections[OleDbConnection]"
+                      connectionManagerID="{6A1ABA38-8326-42EA-8B95-0257D9F77CE2}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[DESKTOP-0U03SDC_MSSQLSERVER_OLAP.IB160103_BI]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Update and Insert data\IB160103.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Update and Insert data\IB160103.Outputs[OLE DB Source Output].Columns[LocationAltKey]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Update and Insert data\IB160103.Outputs[OLE DB Source Output].ExternalColumns[LocationAltKey]"
+                          lineageId="Package\Sequence Container\Update and Insert data\IB160103.Outputs[OLE DB Source Output].Columns[LocationAltKey]"
+                          name="LocationAltKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Update and Insert data\IB160103.Outputs[OLE DB Source Output].Columns[City]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Update and Insert data\IB160103.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                          length="20"
+                          lineageId="Package\Sequence Container\Update and Insert data\IB160103.Outputs[OLE DB Source Output].Columns[City]"
+                          name="City"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Update and Insert data\IB160103.Outputs[OLE DB Source Output].Columns[Region]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Update and Insert data\IB160103.Outputs[OLE DB Source Output].ExternalColumns[Region]"
+                          length="20"
+                          lineageId="Package\Sequence Container\Update and Insert data\IB160103.Outputs[OLE DB Source Output].Columns[Region]"
+                          name="Region"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Update and Insert data\IB160103.Outputs[OLE DB Source Output].Columns[CountryCode]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Update and Insert data\IB160103.Outputs[OLE DB Source Output].ExternalColumns[CountryCode]"
+                          length="5"
+                          lineageId="Package\Sequence Container\Update and Insert data\IB160103.Outputs[OLE DB Source Output].Columns[CountryCode]"
+                          name="CountryCode"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Update and Insert data\IB160103.Outputs[OLE DB Source Output].ExternalColumns[LocationAltKey]"
+                          dataType="i4"
+                          name="LocationAltKey" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Update and Insert data\IB160103.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                          dataType="wstr"
+                          length="20"
+                          name="City" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Update and Insert data\IB160103.Outputs[OLE DB Source Output].ExternalColumns[Region]"
+                          dataType="wstr"
+                          length="20"
+                          name="Region" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Update and Insert data\IB160103.Outputs[OLE DB Source Output].ExternalColumns[CountryCode]"
+                          dataType="wstr"
+                          length="5"
+                          name="CountryCode" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\Update and Insert data\IB160103.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Update and Insert data\IB160103.Outputs[OLE DB Source Error Output].Columns[LocationAltKey]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Update and Insert data\IB160103.Outputs[OLE DB Source Error Output].Columns[LocationAltKey]"
+                          name="LocationAltKey" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Update and Insert data\IB160103.Outputs[OLE DB Source Error Output].Columns[City]"
+                          dataType="wstr"
+                          length="20"
+                          lineageId="Package\Sequence Container\Update and Insert data\IB160103.Outputs[OLE DB Source Error Output].Columns[City]"
+                          name="City" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Update and Insert data\IB160103.Outputs[OLE DB Source Error Output].Columns[Region]"
+                          dataType="wstr"
+                          length="20"
+                          lineageId="Package\Sequence Container\Update and Insert data\IB160103.Outputs[OLE DB Source Error Output].Columns[Region]"
+                          name="Region" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Update and Insert data\IB160103.Outputs[OLE DB Source Error Output].Columns[CountryCode]"
+                          dataType="wstr"
+                          length="5"
+                          lineageId="Package\Sequence Container\Update and Insert data\IB160103.Outputs[OLE DB Source Error Output].Columns[CountryCode]"
+                          name="CountryCode" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Update and Insert data\IB160103.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Update and Insert data\IB160103.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Update and Insert data\IB160103.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Update and Insert data\IB160103.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\Update and Insert data\IB160103_DW"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="IB160103_DW"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[DimLocations]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\Update and Insert data\IB160103_DW.Connections[OleDbConnection]"
+                      connectionManagerID="{4539CB9A-D298-4950-AB7F-20A6A0D05623}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[DESKTOP-0U03SDC_MSSQLSERVER_OLAP.IB160103_BI_DW]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Update and Insert data\IB160103_DW.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Update and Insert data\IB160103_DW.Outputs[OLE DB Source Output].Columns[LocationKey]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Update and Insert data\IB160103_DW.Outputs[OLE DB Source Output].ExternalColumns[LocationKey]"
+                          lineageId="Package\Sequence Container\Update and Insert data\IB160103_DW.Outputs[OLE DB Source Output].Columns[LocationKey]"
+                          name="LocationKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Update and Insert data\IB160103_DW.Outputs[OLE DB Source Output].Columns[LocationAltKey]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Update and Insert data\IB160103_DW.Outputs[OLE DB Source Output].ExternalColumns[LocationAltKey]"
+                          lineageId="Package\Sequence Container\Update and Insert data\IB160103_DW.Outputs[OLE DB Source Output].Columns[LocationAltKey]"
+                          name="LocationAltKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Update and Insert data\IB160103_DW.Outputs[OLE DB Source Output].Columns[CountryCode]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Update and Insert data\IB160103_DW.Outputs[OLE DB Source Output].ExternalColumns[CountryCode]"
+                          length="5"
+                          lineageId="Package\Sequence Container\Update and Insert data\IB160103_DW.Outputs[OLE DB Source Output].Columns[CountryCode]"
+                          name="CountryCode"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Update and Insert data\IB160103_DW.Outputs[OLE DB Source Output].Columns[Region]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Update and Insert data\IB160103_DW.Outputs[OLE DB Source Output].ExternalColumns[Region]"
+                          length="30"
+                          lineageId="Package\Sequence Container\Update and Insert data\IB160103_DW.Outputs[OLE DB Source Output].Columns[Region]"
+                          name="Region"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Update and Insert data\IB160103_DW.Outputs[OLE DB Source Output].Columns[City]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Update and Insert data\IB160103_DW.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                          length="30"
+                          lineageId="Package\Sequence Container\Update and Insert data\IB160103_DW.Outputs[OLE DB Source Output].Columns[City]"
+                          name="City"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Update and Insert data\IB160103_DW.Outputs[OLE DB Source Output].ExternalColumns[LocationKey]"
+                          dataType="i4"
+                          name="LocationKey" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Update and Insert data\IB160103_DW.Outputs[OLE DB Source Output].ExternalColumns[LocationAltKey]"
+                          dataType="i4"
+                          name="LocationAltKey" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Update and Insert data\IB160103_DW.Outputs[OLE DB Source Output].ExternalColumns[CountryCode]"
+                          dataType="wstr"
+                          length="5"
+                          name="CountryCode" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Update and Insert data\IB160103_DW.Outputs[OLE DB Source Output].ExternalColumns[Region]"
+                          dataType="wstr"
+                          length="30"
+                          name="Region" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Update and Insert data\IB160103_DW.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                          dataType="wstr"
+                          length="30"
+                          name="City" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\Update and Insert data\IB160103_DW.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Update and Insert data\IB160103_DW.Outputs[OLE DB Source Error Output].Columns[LocationKey]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Update and Insert data\IB160103_DW.Outputs[OLE DB Source Error Output].Columns[LocationKey]"
+                          name="LocationKey" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Update and Insert data\IB160103_DW.Outputs[OLE DB Source Error Output].Columns[LocationAltKey]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Update and Insert data\IB160103_DW.Outputs[OLE DB Source Error Output].Columns[LocationAltKey]"
+                          name="LocationAltKey" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Update and Insert data\IB160103_DW.Outputs[OLE DB Source Error Output].Columns[CountryCode]"
+                          dataType="wstr"
+                          length="5"
+                          lineageId="Package\Sequence Container\Update and Insert data\IB160103_DW.Outputs[OLE DB Source Error Output].Columns[CountryCode]"
+                          name="CountryCode" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Update and Insert data\IB160103_DW.Outputs[OLE DB Source Error Output].Columns[Region]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Sequence Container\Update and Insert data\IB160103_DW.Outputs[OLE DB Source Error Output].Columns[Region]"
+                          name="Region" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Update and Insert data\IB160103_DW.Outputs[OLE DB Source Error Output].Columns[City]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Sequence Container\Update and Insert data\IB160103_DW.Outputs[OLE DB Source Error Output].Columns[City]"
+                          name="City" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Update and Insert data\IB160103_DW.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Update and Insert data\IB160103_DW.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Update and Insert data\IB160103_DW.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Update and Insert data\IB160103_DW.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\Update and Insert data\Merge Join"
+                  componentClassID="Microsoft.MergeJoin"
+                  contactInfo="Merge Join;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Combine two sorted data flows into one using the FULL, LEFT, or INNER join. We recommend this transformation when data flows can be sorted at their sources."
+                  name="Merge Join"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the type of join to perform."
+                      name="JoinType"
+                      typeConverter="JoinType">1</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the number of columns in the ordering key."
+                      name="NumKeyColumns">1</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the null values are treated as equal values."
+                      name="TreatNullsAsEqual">true</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Indicates the requested maximum buffers per input before blocking."
+                      name="MaxBuffersPerInput">5</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\Update and Insert data\Merge Join.Inputs[Merge Join Left Input]"
+                      hasSideEffects="true"
+                      name="Merge Join Left Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\Update and Insert data\Merge Join.Inputs[Merge Join Left Input].Columns[LocationAltKey]"
+                          cachedDataType="i4"
+                          cachedName="LocationAltKey"
+                          cachedSortKeyPosition="1"
+                          lineageId="Package\Sequence Container\Update and Insert data\Sort 1.Outputs[Sort Output].Columns[LocationAltKey]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Update and Insert data\Merge Join.Inputs[Merge Join Left Input].Columns[City]"
+                          cachedDataType="wstr"
+                          cachedLength="20"
+                          cachedName="City"
+                          lineageId="Package\Sequence Container\Update and Insert data\Sort 1.Outputs[Sort Output].Columns[City]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Update and Insert data\Merge Join.Inputs[Merge Join Left Input].Columns[Region]"
+                          cachedDataType="wstr"
+                          cachedLength="20"
+                          cachedName="Region"
+                          lineageId="Package\Sequence Container\Update and Insert data\Sort 1.Outputs[Sort Output].Columns[Region]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Update and Insert data\Merge Join.Inputs[Merge Join Left Input].Columns[CountryCode]"
+                          cachedDataType="wstr"
+                          cachedLength="5"
+                          cachedName="CountryCode"
+                          lineageId="Package\Sequence Container\Update and Insert data\Sort 1.Outputs[Sort Output].Columns[CountryCode]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                    <input
+                      refId="Package\Sequence Container\Update and Insert data\Merge Join.Inputs[Merge Join Right Input]"
+                      hasSideEffects="true"
+                      name="Merge Join Right Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\Update and Insert data\Merge Join.Inputs[Merge Join Right Input].Columns[LocationAltKey]"
+                          cachedDataType="i4"
+                          cachedName="LocationAltKey"
+                          cachedSortKeyPosition="1"
+                          lineageId="Package\Sequence Container\Update and Insert data\Sort.Outputs[Sort Output].Columns[LocationAltKey]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Update and Insert data\Merge Join.Inputs[Merge Join Right Input].Columns[CountryCode]"
+                          cachedDataType="wstr"
+                          cachedLength="5"
+                          cachedName="CountryCode"
+                          lineageId="Package\Sequence Container\Update and Insert data\Sort.Outputs[Sort Output].Columns[CountryCode]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Update and Insert data\Merge Join.Inputs[Merge Join Right Input].Columns[Region]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="Region"
+                          lineageId="Package\Sequence Container\Update and Insert data\Sort.Outputs[Sort Output].Columns[Region]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Update and Insert data\Merge Join.Inputs[Merge Join Right Input].Columns[City]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="City"
+                          lineageId="Package\Sequence Container\Update and Insert data\Sort.Outputs[Sort Output].Columns[City]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Update and Insert data\Merge Join.Outputs[Merge Join Output]"
+                      isSorted="true"
+                      name="Merge Join Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Update and Insert data\Merge Join.Outputs[Merge Join Output].Columns[LocationAltKey]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Update and Insert data\Merge Join.Outputs[Merge Join Output].Columns[LocationAltKey]"
+                          name="LocationAltKey"
+                          sortKeyPosition="1">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\Update and Insert data\Merge Join.Inputs[Merge Join Left Input].Columns[LocationAltKey]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Update and Insert data\Merge Join.Outputs[Merge Join Output].Columns[LocationAltKey (1)]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Update and Insert data\Merge Join.Outputs[Merge Join Output].Columns[LocationAltKey (1)]"
+                          name="LocationAltKey (1)">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\Update and Insert data\Merge Join.Inputs[Merge Join Right Input].Columns[LocationAltKey]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Update and Insert data\Merge Join.Outputs[Merge Join Output].Columns[CountryCode (1)]"
+                          dataType="wstr"
+                          length="5"
+                          lineageId="Package\Sequence Container\Update and Insert data\Merge Join.Outputs[Merge Join Output].Columns[CountryCode (1)]"
+                          name="CountryCode (1)">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\Update and Insert data\Merge Join.Inputs[Merge Join Right Input].Columns[CountryCode]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Update and Insert data\Merge Join.Outputs[Merge Join Output].Columns[Region (1)]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Sequence Container\Update and Insert data\Merge Join.Outputs[Merge Join Output].Columns[Region (1)]"
+                          name="Region (1)">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\Update and Insert data\Merge Join.Inputs[Merge Join Right Input].Columns[Region]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Update and Insert data\Merge Join.Outputs[Merge Join Output].Columns[City (1)]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Sequence Container\Update and Insert data\Merge Join.Outputs[Merge Join Output].Columns[City (1)]"
+                          name="City (1)">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\Update and Insert data\Merge Join.Inputs[Merge Join Right Input].Columns[City]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Update and Insert data\Merge Join.Outputs[Merge Join Output].Columns[City]"
+                          dataType="wstr"
+                          length="20"
+                          lineageId="Package\Sequence Container\Update and Insert data\Merge Join.Outputs[Merge Join Output].Columns[City]"
+                          name="City">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\Update and Insert data\Merge Join.Inputs[Merge Join Left Input].Columns[City]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Update and Insert data\Merge Join.Outputs[Merge Join Output].Columns[Region]"
+                          dataType="wstr"
+                          length="20"
+                          lineageId="Package\Sequence Container\Update and Insert data\Merge Join.Outputs[Merge Join Output].Columns[Region]"
+                          name="Region">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\Update and Insert data\Merge Join.Inputs[Merge Join Left Input].Columns[Region]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Update and Insert data\Merge Join.Outputs[Merge Join Output].Columns[CountryCode]"
+                          dataType="wstr"
+                          length="5"
+                          lineageId="Package\Sequence Container\Update and Insert data\Merge Join.Outputs[Merge Join Output].Columns[CountryCode]"
+                          name="CountryCode">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\Update and Insert data\Merge Join.Inputs[Merge Join Left Input].Columns[CountryCode]}</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\Update and Insert data\Sort"
+                  componentClassID="Microsoft.Sort"
+                  contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+                  name="Sort"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                      name="EliminateDuplicates">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the maximum number of threads to use for sorting."
+                      expressionType="Notify"
+                      name="MaximumThreads">-1</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\Update and Insert data\Sort.Inputs[Sort Input]"
+                      name="Sort Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\Update and Insert data\Sort.Inputs[Sort Input].Columns[LocationAltKey]"
+                          cachedDataType="i4"
+                          cachedName="LocationAltKey"
+                          lineageId="Package\Sequence Container\Update and Insert data\IB160103_DW.Outputs[OLE DB Source Output].Columns[LocationAltKey]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">1</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\Update and Insert data\Sort.Inputs[Sort Input].Columns[CountryCode]"
+                          cachedDataType="wstr"
+                          cachedLength="5"
+                          cachedName="CountryCode"
+                          lineageId="Package\Sequence Container\Update and Insert data\IB160103_DW.Outputs[OLE DB Source Output].Columns[CountryCode]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">0</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\Update and Insert data\Sort.Inputs[Sort Input].Columns[Region]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="Region"
+                          lineageId="Package\Sequence Container\Update and Insert data\IB160103_DW.Outputs[OLE DB Source Output].Columns[Region]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">0</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\Update and Insert data\Sort.Inputs[Sort Input].Columns[City]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="City"
+                          lineageId="Package\Sequence Container\Update and Insert data\IB160103_DW.Outputs[OLE DB Source Output].Columns[City]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">0</property>
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Update and Insert data\Sort.Outputs[Sort Output]"
+                      isSorted="true"
+                      name="Sort Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Update and Insert data\Sort.Outputs[Sort Output].Columns[LocationAltKey]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Update and Insert data\Sort.Outputs[Sort Output].Columns[LocationAltKey]"
+                          name="LocationAltKey"
+                          sortKeyPosition="1">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Sequence Container\Update and Insert data\IB160103_DW.Outputs[OLE DB Source Output].Columns[LocationAltKey]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Update and Insert data\Sort.Outputs[Sort Output].Columns[CountryCode]"
+                          dataType="wstr"
+                          length="5"
+                          lineageId="Package\Sequence Container\Update and Insert data\Sort.Outputs[Sort Output].Columns[CountryCode]"
+                          name="CountryCode">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Sequence Container\Update and Insert data\IB160103_DW.Outputs[OLE DB Source Output].Columns[CountryCode]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Update and Insert data\Sort.Outputs[Sort Output].Columns[Region]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Sequence Container\Update and Insert data\Sort.Outputs[Sort Output].Columns[Region]"
+                          name="Region">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Sequence Container\Update and Insert data\IB160103_DW.Outputs[OLE DB Source Output].Columns[Region]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Update and Insert data\Sort.Outputs[Sort Output].Columns[City]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Sequence Container\Update and Insert data\Sort.Outputs[Sort Output].Columns[City]"
+                          name="City">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Sequence Container\Update and Insert data\IB160103_DW.Outputs[OLE DB Source Output].Columns[City]}</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\Update and Insert data\Sort 1"
+                  componentClassID="Microsoft.Sort"
+                  contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+                  name="Sort 1"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                      name="EliminateDuplicates">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the maximum number of threads to use for sorting."
+                      expressionType="Notify"
+                      name="MaximumThreads">-1</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\Update and Insert data\Sort 1.Inputs[Sort Input]"
+                      name="Sort Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\Update and Insert data\Sort 1.Inputs[Sort Input].Columns[LocationAltKey]"
+                          cachedDataType="i4"
+                          cachedName="LocationAltKey"
+                          lineageId="Package\Sequence Container\Update and Insert data\IB160103.Outputs[OLE DB Source Output].Columns[LocationAltKey]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">1</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\Update and Insert data\Sort 1.Inputs[Sort Input].Columns[City]"
+                          cachedDataType="wstr"
+                          cachedLength="20"
+                          cachedName="City"
+                          lineageId="Package\Sequence Container\Update and Insert data\IB160103.Outputs[OLE DB Source Output].Columns[City]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">0</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\Update and Insert data\Sort 1.Inputs[Sort Input].Columns[Region]"
+                          cachedDataType="wstr"
+                          cachedLength="20"
+                          cachedName="Region"
+                          lineageId="Package\Sequence Container\Update and Insert data\IB160103.Outputs[OLE DB Source Output].Columns[Region]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">0</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\Update and Insert data\Sort 1.Inputs[Sort Input].Columns[CountryCode]"
+                          cachedDataType="wstr"
+                          cachedLength="5"
+                          cachedName="CountryCode"
+                          lineageId="Package\Sequence Container\Update and Insert data\IB160103.Outputs[OLE DB Source Output].Columns[CountryCode]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">0</property>
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Update and Insert data\Sort 1.Outputs[Sort Output]"
+                      isSorted="true"
+                      name="Sort Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Update and Insert data\Sort 1.Outputs[Sort Output].Columns[LocationAltKey]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Update and Insert data\Sort 1.Outputs[Sort Output].Columns[LocationAltKey]"
+                          name="LocationAltKey"
+                          sortKeyPosition="1">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Sequence Container\Update and Insert data\IB160103.Outputs[OLE DB Source Output].Columns[LocationAltKey]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Update and Insert data\Sort 1.Outputs[Sort Output].Columns[City]"
+                          dataType="wstr"
+                          length="20"
+                          lineageId="Package\Sequence Container\Update and Insert data\Sort 1.Outputs[Sort Output].Columns[City]"
+                          name="City">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Sequence Container\Update and Insert data\IB160103.Outputs[OLE DB Source Output].Columns[City]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Update and Insert data\Sort 1.Outputs[Sort Output].Columns[Region]"
+                          dataType="wstr"
+                          length="20"
+                          lineageId="Package\Sequence Container\Update and Insert data\Sort 1.Outputs[Sort Output].Columns[Region]"
+                          name="Region">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Sequence Container\Update and Insert data\IB160103.Outputs[OLE DB Source Output].Columns[Region]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Update and Insert data\Sort 1.Outputs[Sort Output].Columns[CountryCode]"
+                          dataType="wstr"
+                          length="5"
+                          lineageId="Package\Sequence Container\Update and Insert data\Sort 1.Outputs[Sort Output].Columns[CountryCode]"
+                          name="CountryCode">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Sequence Container\Update and Insert data\IB160103.Outputs[OLE DB Source Output].Columns[CountryCode]}</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\Update and Insert data\Update command"
+                  componentClassID="Microsoft.OLEDBCommand"
+                  contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+                  description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+                  name="Update command"
+                  usesDispositions="true"
+                  version="2">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      expressionType="Notify"
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">UPDATE 
+	DimLocations
+SET 
+	CountryCode = ?,
+	Region = ?,
+	City = ?
+WHERE
+	LocationAltKey = ?</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\Update and Insert data\Update command.Connections[OleDbConnection]"
+                      connectionManagerID="{4539CB9A-D298-4950-AB7F-20A6A0D05623}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[DESKTOP-0U03SDC_MSSQLSERVER_OLAP.IB160103_BI_DW]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\Update and Insert data\Update command.Inputs[OLE DB Command Input]"
+                      errorOrTruncationOperation="Command Execution"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Command Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\Update and Insert data\Update command.Inputs[OLE DB Command Input].Columns[LocationAltKey]"
+                          cachedDataType="i4"
+                          cachedName="LocationAltKey"
+                          cachedSortKeyPosition="1"
+                          externalMetadataColumnId="Package\Sequence Container\Update and Insert data\Update command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                          lineageId="Package\Sequence Container\Update and Insert data\Merge Join.Outputs[Merge Join Output].Columns[LocationAltKey]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Update and Insert data\Update command.Inputs[OLE DB Command Input].Columns[CountryCode (1)]"
+                          cachedDataType="wstr"
+                          cachedLength="5"
+                          cachedName="CountryCode (1)"
+                          externalMetadataColumnId="Package\Sequence Container\Update and Insert data\Update command.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                          lineageId="Package\Sequence Container\Update and Insert data\Merge Join.Outputs[Merge Join Output].Columns[CountryCode (1)]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Update and Insert data\Update command.Inputs[OLE DB Command Input].Columns[Region (1)]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="Region (1)"
+                          externalMetadataColumnId="Package\Sequence Container\Update and Insert data\Update command.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                          lineageId="Package\Sequence Container\Update and Insert data\Merge Join.Outputs[Merge Join Output].Columns[Region (1)]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Update and Insert data\Update command.Inputs[OLE DB Command Input].Columns[City (1)]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="City (1)"
+                          externalMetadataColumnId="Package\Sequence Container\Update and Insert data\Update command.Inputs[OLE DB Command Input].ExternalColumns[Param_3]"
+                          lineageId="Package\Sequence Container\Update and Insert data\Merge Join.Outputs[Merge Join Output].Columns[City (1)]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Update and Insert data\Update command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                          dataType="wstr"
+                          length="5"
+                          name="Param_0">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">65</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Update and Insert data\Update command.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                          dataType="wstr"
+                          length="30"
+                          name="Param_1">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">65</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Update and Insert data\Update command.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                          dataType="wstr"
+                          length="30"
+                          name="Param_2">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">65</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Update and Insert data\Update command.Inputs[OLE DB Command Input].ExternalColumns[Param_3]"
+                          dataType="i4"
+                          name="Param_3">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">81</property>
+                          </properties>
+                        </externalMetadataColumn>
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Update and Insert data\Update command.Outputs[OLE DB Command Output]"
+                      exclusionGroup="1"
+                      name="OLE DB Command Output"
+                      synchronousInputId="Package\Sequence Container\Update and Insert data\Update command.Inputs[OLE DB Command Input]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\Update and Insert data\Update command.Outputs[OLE DB Command Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Command Error Output"
+                      synchronousInputId="Package\Sequence Container\Update and Insert data\Update command.Inputs[OLE DB Command Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Update and Insert data\Update command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Update and Insert data\Update command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Update and Insert data\Update command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Update and Insert data\Update command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Sequence Container\Update and Insert data.Paths[Merge Join Output]"
+                  endId="Package\Sequence Container\Update and Insert data\Conditional Split.Inputs[Conditional Split Input]"
+                  name="Merge Join Output"
+                  startId="Package\Sequence Container\Update and Insert data\Merge Join.Outputs[Merge Join Output]" />
+                <path
+                  refId="Package\Sequence Container\Update and Insert data.Paths[New record]"
+                  endId="Package\Sequence Container\Update and Insert data\DimLocations.Inputs[OLE DB Destination Input]"
+                  name="New record"
+                  startId="Package\Sequence Container\Update and Insert data\Conditional Split.Outputs[New record]" />
+                <path
+                  refId="Package\Sequence Container\Update and Insert data.Paths[OLE DB Source Output]"
+                  endId="Package\Sequence Container\Update and Insert data\Sort 1.Inputs[Sort Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Sequence Container\Update and Insert data\IB160103.Outputs[OLE DB Source Output]" />
+                <path
+                  refId="Package\Sequence Container\Update and Insert data.Paths[OLE DB Source Output1]"
+                  endId="Package\Sequence Container\Update and Insert data\Sort.Inputs[Sort Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Sequence Container\Update and Insert data\IB160103_DW.Outputs[OLE DB Source Output]" />
+                <path
+                  refId="Package\Sequence Container\Update and Insert data.Paths[Sort Output]"
+                  endId="Package\Sequence Container\Update and Insert data\Merge Join.Inputs[Merge Join Left Input]"
+                  name="Sort Output"
+                  startId="Package\Sequence Container\Update and Insert data\Sort 1.Outputs[Sort Output]" />
+                <path
+                  refId="Package\Sequence Container\Update and Insert data.Paths[Sort Output1]"
+                  endId="Package\Sequence Container\Update and Insert data\Merge Join.Inputs[Merge Join Right Input]"
+                  name="Sort Output"
+                  startId="Package\Sequence Container\Update and Insert data\Sort.Outputs[Sort Output]" />
+                <path
+                  refId="Package\Sequence Container\Update and Insert data.Paths[Update]"
+                  endId="Package\Sequence Container\Update and Insert data\Update command.Inputs[OLE DB Command Input]"
+                  name="Update"
+                  startId="Package\Sequence Container\Update and Insert data\Conditional Split.Outputs[Update]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Sequence Container 1"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{200B3831-9B2B-40F5-8970-58958E4C0EA4}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Sequence Container 1">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container 1\Delete data"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{219EE248-C8A6-46CC-8AAB-3FB7D92DA2B4}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Delete data"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Sequence Container 1\Delete data\Delete Command"
+                  componentClassID="Microsoft.OLEDBCommand"
+                  contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+                  description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+                  name="Delete Command"
+                  usesDispositions="true"
+                  version="2">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      expressionType="Notify"
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">DELETE FROM DimLocations
+WHERE LocationKey=?</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container 1\Delete data\Delete Command.Connections[OleDbConnection]"
+                      connectionManagerID="{4539CB9A-D298-4950-AB7F-20A6A0D05623}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[DESKTOP-0U03SDC_MSSQLSERVER_OLAP.IB160103_BI_DW]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container 1\Delete data\Delete Command.Inputs[OLE DB Command Input]"
+                      errorOrTruncationOperation="Command Execution"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Command Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container 1\Delete data\Delete Command.Inputs[OLE DB Command Input].Columns[LocationKey]"
+                          cachedDataType="i4"
+                          cachedName="LocationKey"
+                          externalMetadataColumnId="Package\Sequence Container 1\Delete data\Delete Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                          lineageId="Package\Sequence Container 1\Delete data\DimLocations.Outputs[OLE DB Source Output].Columns[LocationKey]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container 1\Delete data\Delete Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                          dataType="i4"
+                          name="Param_0">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">81</property>
+                          </properties>
+                        </externalMetadataColumn>
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container 1\Delete data\Delete Command.Outputs[OLE DB Command Output]"
+                      exclusionGroup="1"
+                      name="OLE DB Command Output"
+                      synchronousInputId="Package\Sequence Container 1\Delete data\Delete Command.Inputs[OLE DB Command Input]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container 1\Delete data\Delete Command.Outputs[OLE DB Command Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Command Error Output"
+                      synchronousInputId="Package\Sequence Container 1\Delete data\Delete Command.Inputs[OLE DB Command Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container 1\Delete data\Delete Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container 1\Delete data\Delete Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container 1\Delete data\Delete Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container 1\Delete data\Delete Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container 1\Delete data\DimLocations"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="DimLocations"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[DimLocations]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container 1\Delete data\DimLocations.Connections[OleDbConnection]"
+                      connectionManagerID="{4539CB9A-D298-4950-AB7F-20A6A0D05623}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[DESKTOP-0U03SDC_MSSQLSERVER_OLAP.IB160103_BI_DW]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container 1\Delete data\DimLocations.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container 1\Delete data\DimLocations.Outputs[OLE DB Source Output].Columns[LocationKey]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container 1\Delete data\DimLocations.Outputs[OLE DB Source Output].ExternalColumns[LocationKey]"
+                          lineageId="Package\Sequence Container 1\Delete data\DimLocations.Outputs[OLE DB Source Output].Columns[LocationKey]"
+                          name="LocationKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container 1\Delete data\DimLocations.Outputs[OLE DB Source Output].Columns[LocationAltKey]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container 1\Delete data\DimLocations.Outputs[OLE DB Source Output].ExternalColumns[LocationAltKey]"
+                          lineageId="Package\Sequence Container 1\Delete data\DimLocations.Outputs[OLE DB Source Output].Columns[LocationAltKey]"
+                          name="LocationAltKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container 1\Delete data\DimLocations.Outputs[OLE DB Source Output].Columns[CountryCode]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container 1\Delete data\DimLocations.Outputs[OLE DB Source Output].ExternalColumns[CountryCode]"
+                          length="5"
+                          lineageId="Package\Sequence Container 1\Delete data\DimLocations.Outputs[OLE DB Source Output].Columns[CountryCode]"
+                          name="CountryCode"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container 1\Delete data\DimLocations.Outputs[OLE DB Source Output].Columns[Region]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container 1\Delete data\DimLocations.Outputs[OLE DB Source Output].ExternalColumns[Region]"
+                          length="30"
+                          lineageId="Package\Sequence Container 1\Delete data\DimLocations.Outputs[OLE DB Source Output].Columns[Region]"
+                          name="Region"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container 1\Delete data\DimLocations.Outputs[OLE DB Source Output].Columns[City]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container 1\Delete data\DimLocations.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                          length="30"
+                          lineageId="Package\Sequence Container 1\Delete data\DimLocations.Outputs[OLE DB Source Output].Columns[City]"
+                          name="City"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container 1\Delete data\DimLocations.Outputs[OLE DB Source Output].ExternalColumns[LocationKey]"
+                          dataType="i4"
+                          name="LocationKey" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container 1\Delete data\DimLocations.Outputs[OLE DB Source Output].ExternalColumns[LocationAltKey]"
+                          dataType="i4"
+                          name="LocationAltKey" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container 1\Delete data\DimLocations.Outputs[OLE DB Source Output].ExternalColumns[CountryCode]"
+                          dataType="wstr"
+                          length="5"
+                          name="CountryCode" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container 1\Delete data\DimLocations.Outputs[OLE DB Source Output].ExternalColumns[Region]"
+                          dataType="wstr"
+                          length="30"
+                          name="Region" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container 1\Delete data\DimLocations.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                          dataType="wstr"
+                          length="30"
+                          name="City" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Sequence Container 1\Delete data\DimLocations.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container 1\Delete data\DimLocations.Outputs[OLE DB Source Error Output].Columns[LocationKey]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container 1\Delete data\DimLocations.Outputs[OLE DB Source Error Output].Columns[LocationKey]"
+                          name="LocationKey" />
+                        <outputColumn
+                          refId="Package\Sequence Container 1\Delete data\DimLocations.Outputs[OLE DB Source Error Output].Columns[LocationAltKey]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container 1\Delete data\DimLocations.Outputs[OLE DB Source Error Output].Columns[LocationAltKey]"
+                          name="LocationAltKey" />
+                        <outputColumn
+                          refId="Package\Sequence Container 1\Delete data\DimLocations.Outputs[OLE DB Source Error Output].Columns[CountryCode]"
+                          dataType="wstr"
+                          length="5"
+                          lineageId="Package\Sequence Container 1\Delete data\DimLocations.Outputs[OLE DB Source Error Output].Columns[CountryCode]"
+                          name="CountryCode" />
+                        <outputColumn
+                          refId="Package\Sequence Container 1\Delete data\DimLocations.Outputs[OLE DB Source Error Output].Columns[Region]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Sequence Container 1\Delete data\DimLocations.Outputs[OLE DB Source Error Output].Columns[Region]"
+                          name="Region" />
+                        <outputColumn
+                          refId="Package\Sequence Container 1\Delete data\DimLocations.Outputs[OLE DB Source Error Output].Columns[City]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Sequence Container 1\Delete data\DimLocations.Outputs[OLE DB Source Error Output].Columns[City]"
+                          name="City" />
+                        <outputColumn
+                          refId="Package\Sequence Container 1\Delete data\DimLocations.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container 1\Delete data\DimLocations.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container 1\Delete data\DimLocations.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container 1\Delete data\DimLocations.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container 1\Delete data\Lookup"
+                  componentClassID="Microsoft.Lookup"
+                  contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+                  description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+                  name="Lookup"
+                  usesDispositions="true"
+                  version="6">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the SQL statement that generates the lookup table."
+                      expressionType="Notify"
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT
+	T1.Id	  AS [LocationAltKey],
+	T1.[Name] AS [City],
+	T2.[Name] AS [Region],
+	T3.Code   AS [CountryCode]
+FROM
+		  Regional.Cities			T1
+	LEFT JOIN Regional.Regions		T2 ON T1.RegionId = T2.Id
+	LEFT JOIN Regional.Countries    T3 ON T2.CountryId = T3.Id</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                      expressionType="Notify"
+                      name="SqlCommandParam"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (SELECT
+	T1.Id	  AS [LocationAltKey],
+	T1.[Name] AS [City],
+	T2.[Name] AS [Region],
+	T3.Code   AS [CountryCode]
+FROM
+		  Regional.Cities			T1
+	LEFT JOIN Regional.Regions		T2 ON T1.RegionId = T2.Id
+	LEFT JOIN Regional.Countries    T3 ON T2.CountryId = T3.Id) [refTable]
+where [refTable].[LocationAltKey] = ? and [refTable].[CountryCode] = ? and [refTable].[Region] = ? and [refTable].[City] = ?</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the type of connection used to access the reference dataset."
+                      name="ConnectionType"
+                      typeConverter="LookupConnectionType">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the cache type of the lookup table."
+                      name="CacheType"
+                      typeConverter="CacheType">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                      name="NoMatchBehavior"
+                      typeConverter="LookupNoMatchBehavior">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                      name="NoMatchCachePercentage">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                      name="MaxMemoryUsage">25</property>
+                    <property
+                      dataType="System.Int64"
+                      description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                      name="MaxMemoryUsage64">25</property>
+                    <property
+                      dataType="System.String"
+                      description="Indicates whether to reference metadata in an XML format."
+                      name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="LocationAltKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="City" dataType="DT_WSTR" length="20" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Region" dataType="DT_WSTR" length="20" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CountryCode" dataType="DT_WSTR" length="5" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                      name="ParameterMap">#{Package\Sequence Container 1\Delete data\DimLocations.Outputs[OLE DB Source Output].Columns[LocationKey]};#{Package\Sequence Container 1\Delete data\DimLocations.Outputs[OLE DB Source Output].Columns[CountryCode]};#{Package\Sequence Container 1\Delete data\DimLocations.Outputs[OLE DB Source Output].Columns[Region]};#{Package\Sequence Container 1\Delete data\DimLocations.Outputs[OLE DB Source Output].Columns[City]};</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                      name="TreatDuplicateKeysAsError">false</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container 1\Delete data\Lookup.Connections[OleDbConnection]"
+                      connectionManagerID="{6A1ABA38-8326-42EA-8B95-0257D9F77CE2}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[DESKTOP-0U03SDC_MSSQLSERVER_OLAP.IB160103_BI]"
+                      description="Connection manager used to access lookup data."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container 1\Delete data\Lookup.Inputs[Lookup Input]"
+                      name="Lookup Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container 1\Delete data\Lookup.Inputs[Lookup Input].Columns[LocationKey]"
+                          cachedDataType="i4"
+                          cachedName="LocationKey"
+                          lineageId="Package\Sequence Container 1\Delete data\DimLocations.Outputs[OLE DB Source Output].Columns[LocationKey]">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table that a column joins."
+                              name="JoinToReferenceColumn">LocationAltKey</property>
+                            <property
+                              dataType="System.Null"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn" />
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container 1\Delete data\Lookup.Inputs[Lookup Input].Columns[CountryCode]"
+                          cachedDataType="wstr"
+                          cachedLength="5"
+                          cachedName="CountryCode"
+                          lineageId="Package\Sequence Container 1\Delete data\DimLocations.Outputs[OLE DB Source Output].Columns[CountryCode]">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table that a column joins."
+                              name="JoinToReferenceColumn">CountryCode</property>
+                            <property
+                              dataType="System.Null"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn" />
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container 1\Delete data\Lookup.Inputs[Lookup Input].Columns[Region]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="Region"
+                          lineageId="Package\Sequence Container 1\Delete data\DimLocations.Outputs[OLE DB Source Output].Columns[Region]">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table that a column joins."
+                              name="JoinToReferenceColumn">Region</property>
+                            <property
+                              dataType="System.Null"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn" />
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container 1\Delete data\Lookup.Inputs[Lookup Input].Columns[City]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="City"
+                          lineageId="Package\Sequence Container 1\Delete data\DimLocations.Outputs[OLE DB Source Output].Columns[City]">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table that a column joins."
+                              name="JoinToReferenceColumn">City</property>
+                            <property
+                              dataType="System.Null"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn" />
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container 1\Delete data\Lookup.Outputs[Lookup Match Output]"
+                      errorOrTruncationOperation="Lookup"
+                      errorRowDisposition="FailComponent"
+                      exclusionGroup="1"
+                      name="Lookup Match Output"
+                      synchronousInputId="Package\Sequence Container 1\Delete data\Lookup.Inputs[Lookup Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container 1\Delete data\Lookup.Outputs[Lookup Match Output].Columns[LocationAltKey]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Copy Column"
+                          lineageId="Package\Sequence Container 1\Delete data\Lookup.Outputs[Lookup Match Output].Columns[LocationAltKey]"
+                          name="LocationAltKey"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">LocationAltKey</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container 1\Delete data\Lookup.Outputs[Lookup No Match Output]"
+                      description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                      exclusionGroup="1"
+                      name="Lookup No Match Output"
+                      synchronousInputId="Package\Sequence Container 1\Delete data\Lookup.Inputs[Lookup Input]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container 1\Delete data\Lookup.Outputs[Lookup Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Lookup Error Output"
+                      synchronousInputId="Package\Sequence Container 1\Delete data\Lookup.Inputs[Lookup Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container 1\Delete data\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container 1\Delete data\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container 1\Delete data\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container 1\Delete data\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Sequence Container 1\Delete data.Paths[Lookup No Match Output]"
+                  endId="Package\Sequence Container 1\Delete data\Delete Command.Inputs[OLE DB Command Input]"
+                  name="Lookup No Match Output"
+                  startId="Package\Sequence Container 1\Delete data\Lookup.Outputs[Lookup No Match Output]" />
+                <path
+                  refId="Package\Sequence Container 1\Delete data.Paths[OLE DB Source Output]"
+                  endId="Package\Sequence Container 1\Delete data\Lookup.Inputs[Lookup Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Sequence Container 1\Delete data\DimLocations.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{8A0E048F-B076-4DF5-8278-CEC588C3AEA8}"
+      DTS:From="Package\Sequence Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Sequence Container 1" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="188,42"
+          Id="Package\Sequence Container\Update and Insert data"
+          TopLeft="22,15" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="215,112"
+          Size="215,155"
+          Id="Package\Sequence Container"
+          TopLeft="151,10" />
+        <NodeLayout
+          Size="133,42"
+          Id="Package\Sequence Container 1\Delete data"
+          TopLeft="35,18" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="205,115"
+          Size="205,158"
+          Id="Package\Sequence Container 1"
+          TopLeft="153,189" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="257,165">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,24"
+              Start="0,0"
+              End="0,16.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Sequence Container\Update and Insert data">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="98,42"
+          Id="Package\Sequence Container\Update and Insert data\Sort"
+          TopLeft="366,58" />
+        <NodeLayout
+          Size="162,42"
+          Id="Package\Sequence Container\Update and Insert data\Update command"
+          TopLeft="173,307" />
+        <NodeLayout
+          Size="124,42"
+          Id="Package\Sequence Container\Update and Insert data\IB160103"
+          TopLeft="99,33" />
+        <NodeLayout
+          Size="107,42"
+          Id="Package\Sequence Container\Update and Insert data\Sort 1"
+          TopLeft="240,59" />
+        <NodeLayout
+          Size="147,42"
+          Id="Package\Sequence Container\Update and Insert data\IB160103_DW"
+          TopLeft="482,29" />
+        <NodeLayout
+          Size="142,42"
+          Id="Package\Sequence Container\Update and Insert data\DimLocations"
+          TopLeft="417,315" />
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Sequence Container\Update and Insert data\Conditional Split"
+          TopLeft="282,207" />
+        <NodeLayout
+          Size="130,42"
+          Id="Package\Sequence Container\Update and Insert data\Merge Join"
+          TopLeft="292,133" />
+        <EdgeLayout
+          Id="Package\Sequence Container\Update and Insert data.Paths[Update]"
+          TopLeft="335,249">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-81,58"
+              Start="0,0"
+              End="-81,50.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.5555555555556" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.5555555555556"
+                    Point2="0,23.5555555555556"
+                    Point3="-4,23.5555555555556" />
+                  <mssgle:LineSegment
+                    End="-77,23.5555555555556" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-77,23.5555555555556"
+                    Point2="-81,23.5555555555556"
+                    Point3="-81,27.5555555555556" />
+                  <mssgle:LineSegment
+                    End="-81,50.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-56.78029296875,28.5555555555556,32.5605859375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\Update and Insert data.Paths[Sort Output1]"
+          TopLeft="415,100">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-37.6666666666667,33"
+              Start="0,0"
+              End="-37.6666666666667,25.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.5592705167173" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,15.5592705167173"
+                    Point2="0,19.5592705167173"
+                    Point3="-4,19.5592705167173" />
+                  <mssgle:LineSegment
+                    End="-33.6666666666667,19.5592705167173" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-33.6666666666667,19.5592705167173"
+                    Point2="-37.6666666666667,19.5592705167173"
+                    Point3="-37.6666666666667,23.5592705167173" />
+                  <mssgle:LineSegment
+                    End="-37.6666666666667,25.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\Update and Insert data.Paths[Sort Output]"
+          TopLeft="293.5,101">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="43.1666666666667,32"
+              Start="0,0"
+              End="43.1666666666667,24.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,14.9665653495441" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,14.9665653495441"
+                    Point2="0,18.9665653495441"
+                    Point3="4,18.9665653495441" />
+                  <mssgle:LineSegment
+                    End="39.1666666666667,18.9665653495441" />
+                  <mssgle:CubicBezierSegment
+                    Point1="39.1666666666667,18.9665653495441"
+                    Point2="43.1666666666667,18.9665653495441"
+                    Point3="43.1666666666667,22.9665653495441" />
+                  <mssgle:LineSegment
+                    End="43.1666666666667,24.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\Update and Insert data.Paths[OLE DB Source Output1]"
+          TopLeft="482,35.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-67,22.5"
+              Start="0,0"
+              End="-67,15">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-63,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-63,0"
+                    Point2="-67,0"
+                    Point3="-67,4" />
+                  <mssgle:LineSegment
+                    End="-67,15" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\Update and Insert data.Paths[OLE DB Source Output]"
+          TopLeft="223,36.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="70.5,22.5"
+              Start="0,0"
+              End="70.5,15">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="66.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="66.5,0"
+                    Point2="70.5,0"
+                    Point3="70.5,4" />
+                  <mssgle:LineSegment
+                    End="70.5,15" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\Update and Insert data.Paths[New record]"
+          TopLeft="384,249">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="104,66"
+              Start="0,0"
+              End="104,58.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.8045977011494" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.8045977011494"
+                    Point2="0,26.8045977011494"
+                    Point3="4,26.8045977011494" />
+                  <mssgle:LineSegment
+                    End="100,26.8045977011494" />
+                  <mssgle:CubicBezierSegment
+                    Point1="100,26.8045977011494"
+                    Point2="104,26.8045977011494"
+                    Point3="104,30.8045977011494" />
+                  <mssgle:LineSegment
+                    End="104,58.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="26.44701171875,31.8045977011494,51.1059765625,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\Update and Insert data.Paths[Merge Join Output]"
+          TopLeft="358.25,175">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,32"
+              Start="0,0"
+              End="0,24.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\Update and Insert data\IB160103">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\Update and Insert data\IB160103_DW">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\Update and Insert data\DimLocations">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Sequence Container 1\Delete data">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="113,42"
+          Id="Package\Sequence Container 1\Delete data\Lookup"
+          TopLeft="413,184" />
+        <NodeLayout
+          Size="160,42"
+          Id="Package\Sequence Container 1\Delete data\Delete Command"
+          TopLeft="389,301" />
+        <NodeLayout
+          Size="142,42"
+          Id="Package\Sequence Container 1\Delete data\DimLocations"
+          TopLeft="399,76" />
+        <EdgeLayout
+          Id="Package\Sequence Container 1\Delete data.Paths[OLE DB Source Output]"
+          TopLeft="469.75,118">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,66"
+              Start="0,0"
+              End="0,58.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,58.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container 1\Delete data.Paths[Lookup No Match Output]"
+          TopLeft="469.25,226">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,75"
+              Start="0,0"
+              End="0,67.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,67.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-55.80638671875,27.9453125,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container 1\Delete data\Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container 1\Delete data\DimLocations">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

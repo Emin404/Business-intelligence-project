@@ -1,0 +1,10 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="DESKTOP-0U03SDC_MSSQLSERVER_OLAP.IB160103_BI_DW"
+  DTS:DTSID="{4539CB9A-D298-4950-AB7F-20A6A0D05623}"
+  DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectionString="Data Source=DESKTOP-0U03SDC\MSSQLSERVER_OLAP;Initial Catalog=IB160103_BI_DW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>
